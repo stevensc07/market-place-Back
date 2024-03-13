@@ -2,9 +2,10 @@
 	"version": 2,
 	"name": "Middleware",
 	"builds": [
-	  { "src": "/app.js", "use": "@vercel/node" }
+	  { "src": "app.js", "use": "@vercel/node" }
 	],
 	"routes": [
-	  { "src": "/.*", "dest": "/routes.js" }	  
+	  { "src": "/api/.*", "dest": "app.js" },
+	  { "src": "/(.*)", "dest": "app.js" }
 	]
 }
