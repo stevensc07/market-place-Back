@@ -1,11 +1,11 @@
 {
-
-	"name": "Middleware MagicLog MarketPlace",
+	"version": 2,
+	"name": "Middleware",
 	"builds": [
-	  { "src": "./app.js", "use": "@vercel/node" }
+	  { "src": "/app.js", "use": "@vercel/node" }
 	],
 	"routes": [
-	  { "src": "/(.*)", "dest": "/" }
+	  { "src": "/.*", "dest": "/app.js" }
 	  
 	]
    }
