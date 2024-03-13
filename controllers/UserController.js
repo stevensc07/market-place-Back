@@ -9,22 +9,33 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    // Buscar el usuario por su correo electrónico
+    let user = await User.findOne({ email });
 
+    // Verificar si el usuario existe en la base de datos
     if (!user) {
+      console.log("User not found"); // Agrega un mensaje de depuración
       return res.status(404).json({ message: "User not found" });
     }
 
+    // Verificar si la contraseña coincide
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
+      console.log("Invalid password"); // Agrega un mensaje de depuración
       return res.status(401).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ email: user.email }, secretKey);
+    // Generar el token
+    const token = jwt.sign(
+      { email: user.email, isAdmin: user.email === "admin@admin.com" },
+      secretKey
+    );
 
+    // Devolver el token y otros datos relevantes
     res.status(200).json({ token, firstName: user.firstName });
   } catch (error) {
+    console.error(error); // Agrega un mensaje de depuración para los errores
     res.status(500).json({ message: "Internal server error" });
   }
 };
