@@ -8,8 +8,8 @@
 	  { "src": "/api/.*", "dest": "app.js" },
       {
         "src": "/login",  
-        "dest": "/api/login" 
+        "dest": "routes.js" 
       },
-	  { "src": "/(.*)", "dest": "app.js" }
+	  { "src": "/(.*)", "dest": "routes.js" }
 	]
 }
